@@ -1,1 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Tools - Free Online Video Utility</title>
+  <meta name="description" content="Free online video utility tool for creators. Analyze YouTube video links quickly and easily.">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
+    body {
+      background: #0b0f19;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 22px 6%;
+      border-bottom: 1px solid #202637;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #ff4d67;
+    }
+
+    nav a {
+      color: #aeb6c8;
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: 14px;
+    }
+
+    .hero {
+      max-width: 850px;
+      margin: 80px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #171d2c;
+      border: 1px solid #293247;
+      color: #aeb6c8;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: 42px;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: #ff4d67;
+    }
+
+    .subtitle {
+      color: #9da7bb;
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    .tool-box {
+      background: #121827;
+      border: 1px solid #273047;
+      padding: 25px;
+      border-radius: 18px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    }
+
+    input {
+      width: 100%;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #303a52;
+      background: #0b0f19;
+      color: white;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #ff4d67;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #result {
+      display: none;
+      margin-top: 25px;
+      text-align: left;
+      background: #0b0f19;
+      border: 1px solid #273047;
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    #thumb {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .result-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .watch {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: #20283a;
+      color: white;
+      padding: 13px;
+      border-radius: 9px;
+      margin-top: 12px;
+    }
+
+    .features {
+      max-width: 1000px;
+      margin: 20px auto 70px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      background: #121827;
+      border: 1px solid #273047;
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #929caf;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      border-top: 1px solid #202637;
+      padding: 25px;
+      color: #70798c;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        margin-top: 50px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Video<span>Tools</span></div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="badge">FREE ONLINE VIDEO TOOL</div>
+
+  <h1>Analyze Your <span>YouTube Video</span></h1>
+
+  <p class="subtitle">
+    Paste a YouTube video link below to quickly preview the video,
+    view its thumbnail and access the official video page.
+  </p>
+
+  <div class="tool-box">
+
+    <input
+      type="text"
+      id="url"
+      placeholder="Paste YouTube video URL here..."
+    >
+
+    <button onclick="analyzeVideo()">Analyze Video</button>
+
+    <div id="result">
+      <img id="thumb" src="" alt="YouTube thumbnail">
+
+      <div class="result-title" id="videoTitle">
+        YouTube Video
+      </div>
+
+      <a id="watchLink" class="watch" href="#" target="_blank">
+        Watch on YouTube
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="features">
+
+  <div class="feature">
+    <h3>⚡ Fast</h3>
+    <p>Quickly analyze a YouTube video link directly from your browser.</p>
+  </div>
+
+  <div class="feature">
+    <h3>📱 Mobile Friendly</h3>
+    <p>Designed to work smoothly on smartphones, tablets and computers.</p>
+  </div>
+
+  <div class="feature">
+    <h3>🔒 Simple & Safe</h3>
+    <p>No account is required to use the basic video utility.</p>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 VideoTools. All rights reserved.
+</footer>
+
+<script>
+
+function getVideoId(url) {
+
+  try {
+
+    const parsed = new URL(url);
+
+    if (parsed.hostname.includes("youtu.be")) {
+      return parsed.pathname.substring(1);
+    }
+
+    if (parsed.hostname.includes("youtube.com")) {
+      return parsed.searchParams.get("v");
+    }
+
+    return null;
+
+  } catch (error) {
+    return null;
+  }
+}
+
+function analyzeVideo() {
+
+  const input = document.getElementById("url").value.trim();
+
+  const videoId = getVideoId(input);
+
+  if (!videoId) {
+    alert("Please enter a valid YouTube video URL.");
+    return;
+  }
+
+  const thumbnail =
+    "https://img.youtube.com/vi/" +
+    videoId +
+    "/maxresdefault.jpg";
+
+  document.getElementById("thumb").src = thumbnail;
+
+  document.getElementById("videoTitle").innerText =
+    "YouTube Video Preview";
+
+  document.getElementById("watchLink").href =
+    "https://www.youtube.com/watch?v=" + videoId;
+
+  document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
