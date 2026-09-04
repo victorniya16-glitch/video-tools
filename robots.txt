@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://victorniya16-glitch.github.io/video-tools/sitemap.xml
