@@ -3,38 +3,249 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Tools - Free Online Video Utility</title>
-  <meta name="description" content="Free online video utility tool for creators. Analyze YouTube video links quickly and easily.">
+  <title>Free YouTube Thumbnail Downloader HD - VideoTools</title>
+  <meta name="description" content="Free online tool to download high quality YouTube video thumbnails in HD, Full HD, and standard resolutions. Fast, simple, and creator-friendly.">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-
     body {
-      background: #0b0f19;
-      color: white;
-      min-height: 100vh;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      line-height: 1.6;
+      padding: 20px 15px;
     }
-
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
     header {
-      padding: 22px 6%;
-      border-bottom: 1px solid #202637;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
+      padding: 20px 0 10px;
     }
-
     .logo {
-      font-size: 22px;
-      font-weight: bold;
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .logo span {
+      color: #ff3366;
+    }
+    .badge {
+      display: inline-block;
+      background: #1f242c;
+      color: #8b949e;
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-top: 15px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 15px 0 10px;
+      line-height: 1.3;
+    }
+    h1 span {
+      color: #ff3366;
+    }
+    p.subtitle {
+      font-size: 14px;
+      color: #8b949e;
+      margin-bottom: 25px;
+    }
+    .tool-box {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+    input[type="text"]:focus {
+      border-color: #ff3366;
+    }
+    button.btn-main {
+      width: 100%;
+      background: #ff3366;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button.btn-main:active {
+      background: #e02456;
+    }
+    #result-box {
+      display: none;
+      margin-top: 25px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    #thumb-preview {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #30363d;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-action {
+      display: block;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+    }
+    .btn-download {
+      background: #238636;
+      color: #ffffff;
+    }
+    .btn-watch {
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+    }
+    /* Content & SEO Section */
+    .content-box {
+      margin-top: 35px;
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .content-box h2 {
+      font-size: 18px;
+      color: #fff;
+      margin: 15px 0 8px;
+    }
+    .content-box p {
+      font-size: 13px;
+      color: #8b949e;
+      margin-bottom: 12px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      padding: 20px 0;
+      font-size: 12px;
+      color: #6e7681;
+      border-top: 1px solid #21262d;
+    }
+    footer a {
+      color: #8b949e;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <a href="#" class="logo">Video<span>Tools</span></a>
+      <div><span class="badge">YouTube Creator Utility</span></div>
+      <h1>Download YouTube <span>Thumbnails</span> in HD</h1>
+      <p class="subtitle">Quickly extract and save original high-resolution video thumbnail covers for your projects.</p>
+    </header>
+
+    <div class="tool-box">
+      <input type="text" id="videoUrl" placeholder="Paste YouTube video link here...">
+      <button class="btn-main" onclick="processVideo()">Get Thumbnail</button>
+    </div>
+
+    <!-- Output Preview Section -->
+    <div id="result-box">
+      <img id="thumb-preview" src="" alt="YouTube Thumbnail Preview">
+      <div class="btn-group">
+        <a id="btn-hd" href="#" target="_blank" download class="btn-action btn-download">Download Full HD (1080p)</a>
+        <a id="btn-hq" href="#" target="_blank" download class="btn-action btn-download" style="background:#1f6feb;">Download High Quality (HQ)</a>
+        <a id="btn-yt" href="#" target="_blank" class="btn-action btn-watch">Open Official YouTube Page</a>
+      </div>
+    </div>
+
+    <!-- SEO / Content Guide (Crucial for AdSense) -->
+    <div class="content-box">
+      <h2>How to use this tool?</h2>
+      <p>1. Copy any YouTube video URL from the YouTube app or browser.</p>
+      <p>2. Paste the link into the box above and click "Get Thumbnail".</p>
+      <p>3. Choose your desired resolution and tap download.</p>
+
+      <h2>Why save YouTube thumbnails?</h2>
+      <p>Content creators, graphic designers, and marketers often study successful thumbnail designs for creative inspiration, presentation graphics, and archival purposes.</p>
+
+      <h2>Fair Use & Disclaimer</h2>
+      <p>This utility extracts public thumbnail covers via YouTube's content delivery servers. Please respect intellectual property rights and use downloaded material ethically.</p>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 VideoTools. Built for creators.</p>
+    </footer>
+  </div>
+
+  <script>
+    function extractVideoId(url) {
+      const regExp = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/;
+      const match = url.match(regExp);
+      return (match && match[1]) ? match[1] : null;
     }
 
-    .logo span {
-      color: #ff4d67;
+    function processVideo() {
+      const input = document.getElementById("videoUrl").value.trim();
+      const videoId = extractVideoId(input);
+
+      if (!videoId) {
+        alert("Please enter a valid YouTube video link.");
+        return;
+      }
+
+      // Thumbnail links
+      const maxResUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      const hqUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+      // Set URLs
+      document.getElementById("thumb-preview").src = maxResUrl;
+      document.getElementById("btn-hd").href = maxResUrl;
+      document.getElementById("btn-hq").href = hqUrl;
+      document.getElementById("btn-yt").href = watchUrl;
+
+      // Display result box
+      document.getElementById("result-box").style.display = "block";
     }
+  </script>
+</body>
+</html>    }
 
     nav a {
       color: #aeb6c8;
